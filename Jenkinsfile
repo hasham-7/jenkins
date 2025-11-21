@@ -1,3 +1,5 @@
+flag=true
+
 pipeline {
     agent any
 
@@ -10,6 +12,11 @@ pipeline {
 
         stage('Test') {
             steps {
+                when {
+                    expression {
+                        flag == false
+                    }
+                }
                 echo 'Testing...'
             }
         }
