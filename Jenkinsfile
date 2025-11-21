@@ -8,10 +8,6 @@ pipeline {
         booleanParam(name: 'executeTests', defaultValue: true, description: 'Run tests?')
     }
 
-    tools {
-        maven 'Maven'
-    }
-
     environment {
         NEW_VERSION = '1.3.0'
     }
@@ -21,7 +17,6 @@ pipeline {
             steps {
                 echo 'Building...'
                 echo "Building Version ${NEW_VERSION}"
-                sh "nvm install"
             }
         }
 
