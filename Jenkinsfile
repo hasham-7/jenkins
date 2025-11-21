@@ -2,11 +2,15 @@ flag=true
 
 pipeline {
     agent any
+    environment {
+        NEW_VERSION = '1.3.0'
 
     stages {
         stage('Build') {
             steps {
                 echo 'Building...'
+                //using environment variable
+                echo"Building Version ${NEW_VERSION}"
             }
         }
 
