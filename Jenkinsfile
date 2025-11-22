@@ -1,6 +1,9 @@
 pipeline {
     agent any
 
+    enviroment {
+        VERSION = '10.0.1'
+    }
     stages {
         stage('Build') {
             steps {
@@ -17,6 +20,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying...'
+                echo "Version ${VERSION}"
             }
         }
     }
