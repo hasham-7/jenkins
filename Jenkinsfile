@@ -1,13 +1,19 @@
 pipeline {
     agent any
 
+    tools {
+        maven 'Maven'     // ← Part 11: Add Build Tools (Maven)
+    }
+
     environment {
         VERSION = '10.0.1'
     }
+
     stages {
         stage('Build') {
             steps {
                 echo 'Building...'
+                sh 'mvn -version'   // optional: verify Maven
             }
         }
 
@@ -26,12 +32,10 @@ pipeline {
     }
 
     post {
-        // This always runs
         always {
             echo 'Pipeline Completed'
         }
 
-        // This runs only if the build fails
         failure {
             echo 'Post Action if Build Failed'
         }
