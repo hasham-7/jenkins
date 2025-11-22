@@ -20,4 +20,16 @@ pipeline {
             }
         }
     }
+
+    post {
+        // This always runs
+        always {
+            echo 'Pipeline Completed'
+        }
+
+        // This runs only if the build fails
+        failure {
+            echo 'Post Action if Build Failed'
+        }
+    }
 }
