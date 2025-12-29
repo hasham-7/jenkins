@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     tools {
-        maven 'Maven'     // Part 11: Add Build Tools
+        maven 'Maven'  // This should match the Maven installation name in Jenkins Global Tool Configuration
     }
 
     environment {
@@ -17,7 +17,10 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building...'
-                sh 'mvn -version'
+                // Clean previous builds and compile the project
+                sh 'mvn clean compile'
+                // Or package into a JAR if needed
+                sh 'mvn package'
             }
         }
 
@@ -26,7 +29,8 @@ pipeline {
                 expression { params.executeTests }
             }
             steps {
-                echo 'Testing...'
+                echo 'Running Tests...'
+                sh 'mvn test'
             }
         }
 
@@ -34,6 +38,8 @@ pipeline {
             steps {
                 echo 'Deploying...'
                 echo "Version ${VERSION}"
+                // Example: copy jar to some directory or deploy somewhere
+                // sh 'cp target/my-app-1.0-SNAPSHOT.jar /path/to/deploy/'
             }
         }
     }
